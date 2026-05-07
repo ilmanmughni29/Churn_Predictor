@@ -325,54 +325,8 @@ if st.button('Predict Churn'):
 
     else:
         st.success('LOW RISK')
-
-    # =====================================================
-    # SHAP EXPLANATION
-    # =====================================================
-    st.subheader('🧠 Model Explainability (SHAP)')
-
-    try:
-
-        # ambil classifier
-        classifier = model.named_steps['classifier']
-
-        # preprocessing manually
-        transformed_data = model.named_steps['feature_engineer'].transform(input_df)
-
-        transformed_data = model.named_steps['encoder'].transform(transformed_data)
-
-        transformed_data = model.named_steps['scaler'].transform(transformed_data)
-
-        # dataframe agar feature names muncul
-        transformed_df = pd.DataFrame(
-            transformed_data,
-            columns=classifier.feature_names_in_
-        )
-
-        # shap explainer
-        explainer = shap.LinearExplainer(
-            classifier,
-            transformed_df
-        )
-
-        shap_values = explainer(transformed_df)
-
-        # waterfall plot
-        fig = plt.figure(figsize=(10, 5))
-
-        shap.plots.waterfall(
-            shap_values[0],
-            max_display=10,
-            show=False
-        )
-
-        st.pyplot(fig)
-
-    except Exception as e:
-        st.warning(f'SHAP visualization unavailable: {e}')
         
     
-
 # =====================================================
 # FOOTER
 # =====================================================
