@@ -167,10 +167,11 @@ Example:
 # Project Structure
 
 ```bash
-Churn_Predictor/
+churn_predictor/
 │
 ├── streamlit_app.py
 ├── requirements.txt
+├── runtime.txt
 ├── telco_churn_pipeline.pkl
 ├── telco_churn_metadata.pkl
 └── README.md
